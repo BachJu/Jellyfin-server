@@ -3,6 +3,7 @@ from pytubefix import Playlist
 from pytubefix.cli import on_progress
 import os
 
+#definindo o diretório
 diretorio_base = os.path.abspath(os.path.dirname(__file__))
 local_salver = os.path.join(diretorio_base, '..', 'midia')
 
@@ -25,6 +26,7 @@ def main():
                 print(yt.title)
                 ys = yt.streams.get_highest_resolution()
                 ys.download(output_path=local_salver)
+                print("\nVídeo baixado com sucesso")
 
             case 2:
                 url = input("Digite a url: ")
@@ -33,6 +35,7 @@ def main():
                 print(yt.title)
                 ys = yt.streams.get_audio_only()
                 ys.download()
+                print("\nAudio baixado com sucesso")
         
             case 3:
                 url = input("Digite a url: ")
@@ -40,6 +43,7 @@ def main():
                 for video in pl.videos:
                     ys = video.streams.get_audio_only()
                     ys.download()
+                print("\nPlaylist baixada com sucesso")
             case 9:
                 print("Tchau :/")
                 break;
@@ -48,9 +52,3 @@ def main():
         
 
 m = main()
-'''
-#Diretório para salvar o vídeo/audio
-yt = YouTube(url, on_progress_callback=on_progress)
-ys = yt.streams.get_highest_resolution()
-ys.download(output_path="path/to/directory")
-'''

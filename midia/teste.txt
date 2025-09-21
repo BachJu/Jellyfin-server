@@ -1,1 +1,0 @@
-Criando o diretório mídia para o Jellyfin
