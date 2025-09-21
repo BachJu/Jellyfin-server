@@ -18,18 +18,27 @@ def limpaTela():
         _ = system("clear")
 
 def MenuPrincipal():
-    limpaTela()
+    print("\n")
     print("#"*50)
     print("1. Vídeo")
     print("2. Audio")
-    print("3. Playlist")
+    print("9. Sair")
+    print("-"*50)
+    print("#"*50)
+
+def tipoDeVideo():
+    print("\n")
+    print("#"*50)
+    print("1. Filme")
+    print("2. Serie")
+    print("3. Videoclipe")
     print("9. Sair")
     print("-"*50)
     print("#"*50)
 
 def main():
-    MenuPrincipal()
     while(True):
+        MenuPrincipal()
         match(int(input("Opcao: "))):
             case 1:
                 url = input("Digite a url: ")
@@ -37,8 +46,26 @@ def main():
                 yt = YouTube(url, on_progress_callback=on_progress)
                 print(yt.title)
                 ys = yt.streams.get_highest_resolution()
-                ys.download(output_path=local_salvar)
-                print("\nVídeo baixado com sucesso\n")
+
+                tipoDeVideo()
+                match(int(input("Opcao: "))):
+                    case 1:
+                        local_salvar = os.path.join(diretorio_base, '..', 'midia/filme')
+                        ys.download(output_path=local_salvar)
+                        print("\nVídeo baixado com sucesso em filme\n")
+                    case 2:
+                        local_salvar = os.path.join(diretorio_base, '..', 'midia/serie')
+                        ys.download(output_path=local_salvar)
+                        print("\nVídeo baixado com sucesso em serie\n")
+                    case 3:
+                        local_salvar = os.path.join(diretorio_base, '..', 'midia/videoclipe')
+                        ys.download(output_path=local_salvar)
+                        print("\nVídeo baixado com sucesso em videoclipe\n")
+                    case 9:
+                        print("Tchau :/")
+                        break;
+                    case _:
+                        print("Não é uma opção válida")
 
             case 2:
                 url = input("Digite a url: ")
@@ -46,9 +73,10 @@ def main():
                 yt = YouTube(url, on_progress_callback=on_progress)
                 print(yt.title)
                 ys = yt.streams.get_audio_only()
+                local_salvar = os.path.join(diretorio_base, '..', 'midia/musica')
                 ys.download(output_path=local_salvar)
                 print("\nAudio baixado com sucesso\n")
-        
+
             case 3:
                 url = input("Digite a url: ")
                 pl = Playlist(url)
@@ -58,9 +86,11 @@ def main():
                 print("\nPlaylist baixada com sucesso\n")
 
             case 9:
+                print("\n")
                 print("Tchau :/")
                 break;
             case _:
+                print("\n")
                 print("Não é uma opção válida")
         
 if __name__ == "__main__":
