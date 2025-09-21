@@ -1,9 +1,11 @@
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:latest
     container_name: jellyfin
     ports:
       - 
     volumes:
-      - 
-    restart: 
+      - ./config:/config
+      - ./cache:/cache
+      - ./media:/media
+    restart: unless-stopped
