@@ -1,6 +1,7 @@
 services:
   jellyfin:
-    image: 
+    image: jellyfin/jellyfin
+    container_name: jellyfin
     ports:
       - 
     volumes:
