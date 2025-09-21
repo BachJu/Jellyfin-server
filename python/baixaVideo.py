@@ -18,29 +18,38 @@ def MenuPrincipal() -> int:
 
 def main():
     opcao = MenuPrincipal()
-    while (opcao != 9):
-        url = "url"
-
-        if (opcao == 1):
-            #Para baixar o vídeo
-            yt = YouTube(url, on_progress_callback=on_progress)
-            print(yt.title)
-            ys = yt.streams.get_highest_resolution()
-            ys.download()
-
-        if (opcao == 2):
-            #Para baixar o audio
-            yt = YouTube(url, on_progress_callback=on_progress)
-            print(yt.title)
-            ys = yt.streams.get_audio_only()
-            ys.download()
-        
-        if (opcao == 3):
-            pl = Playlist(url)
-            for video in pl.videos:
-                ys = video.streams.get_audio_only()
+    while(True):
+        match(opcao):
+            case 1:
+                url = input("Digite a url: ")
+                #Para baixar o vídeo
+                yt = YouTube(url, on_progress_callback=on_progress)
+                print(yt.title)
+                ys = yt.streams.get_highest_resolution()
                 ys.download()
 
+            case 2:
+                url = input("Digite a url: ")
+                #Para baixar o audio
+                yt = YouTube(url, on_progress_callback=on_progress)
+                print(yt.title)
+                ys = yt.streams.get_audio_only()
+                ys.download()
+        
+            case 3:
+                url = input("Digite a url: ")
+                pl = Playlist(url)
+                for video in pl.videos:
+                    ys = video.streams.get_audio_only()
+                    ys.download()
+            case 9:
+                print("Tchau :/")
+                break;
+            case _:
+                print("Não é uma opção válida")
+        
+
+m = main()
 '''
 #Diretório para salvar o vídeo/audio
 yt = YouTube(url, on_progress_callback=on_progress)
