@@ -1,0 +1,8 @@
+services:
+  jellyfin:
+    image: 
+    ports:
+      - 
+    volumes:
+      - 
+    restart: 
