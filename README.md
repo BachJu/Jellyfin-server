@@ -8,4 +8,4 @@ Visando a facilidade, criamos um *script* na linguagem *python* para *download* 
 
 ## Referência
 Damos os devidos crédito aos seguintes criadores:
-[pytubeFix] (https://pypi.org/project/pytubefix).
+* [pytubeFix](https://pypi.org/project/pytubefix).
