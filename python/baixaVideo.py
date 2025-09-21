@@ -1,32 +1,30 @@
 from pytubefix import YouTube
 from pytubefix import Playlist
 from pytubefix.cli import on_progress
+import os
 
-def MenuPrincipal() -> int:
-    opcoes = [1, 2, 3, 9]
-    opcao = 10
+diretorio_base = os.path.abspath(os.path.dirname(__file__))
+local_salver = os.path.join(diretorio_base, '..', 'midia')
 
-    while opcao not in opcoes:
-        print("#"*50)
-        print("1. Vídeo")
-        print("2. Audio")
-        print("3. Playlist")
-        print("-"*50)
-        opcao = int(input("Opcao: "))
-        print("#"*50)
-    return opcao
+def MenuPrincipal():
+    print("#"*50)
+    print("1. Vídeo")
+    print("2. Audio")
+    print("3. Playlist")
+    print("-"*50)
+    print("#"*50)
 
 def main():
-    opcao = MenuPrincipal()
+    MenuPrincipal()
     while(True):
-        match(opcao):
+        match(int(input("Opcao: "))):
             case 1:
                 url = input("Digite a url: ")
                 #Para baixar o vídeo
                 yt = YouTube(url, on_progress_callback=on_progress)
                 print(yt.title)
                 ys = yt.streams.get_highest_resolution()
-                ys.download()
+                ys.download(output_path=local_salver)
 
             case 2:
                 url = input("Digite a url: ")
